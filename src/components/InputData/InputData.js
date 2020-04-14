@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import NodsForm from "./Forms/NodesForm";
 import PathsData from "./Forms/PathsForm";
 import NodeCard from "../NodeCard/NodeCard";
+import NodesTable from "./Tables/NodesTable";
+import PathsTable from "./Tables/PathsTable";
 
 // REDUX
 import { useSelector } from "react-redux";
@@ -29,8 +31,8 @@ const InputData = (props) => {
               Here you can add new nodes and view them in table.
             </Typography>
             <div className="row">
-              <div className="col-md-6 col-sm-12">
-                <Paper style={{ padding: "15px" }} elevation={2}>
+              <div className="col-md-6 col-sm-12 d-flex justify-content-center align-items-center">
+                <Paper style={{ padding: "30px", width: "100%" }} elevation={2}>
                   <Typography className="mb-3" variant="h5">
                     Create New Node
                   </Typography>
@@ -39,6 +41,7 @@ const InputData = (props) => {
               </div>
               <div className="col-md-6 col-sm-12">
                 {/* CONTENT WILL COME HERE (TABLE) */}
+                <NodesTable />
               </div>
             </div>
           </Paper>
@@ -68,6 +71,7 @@ const InputData = (props) => {
               </div>
               <div className="col-md-6 col-sm-12">
                 {/* CONTENT WILL COME HERE (TABLE) */}
+                <PathsTable />
               </div>
             </div>
           </Paper>
