@@ -39,7 +39,7 @@ function App() {
       <Layout>
         <Switch>
           <Route path="/" exact component={InputData} />
-          <Route path="/results" exact component={DispatchBuilder} />
+          <Route path="/dispatchbuilder" exact component={DispatchBuilder} />
         </Switch>
       </Layout>
     </div>

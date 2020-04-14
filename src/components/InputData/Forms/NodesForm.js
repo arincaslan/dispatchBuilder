@@ -1,20 +1,25 @@
-import React, {useState, useEffect,} from 'react';
+import React, {useState, useEffect} from 'react';
 import classes from './NodesForm.module.css';
-import Button from '../../UI/Button/Button';
+// import Button from '../../UI/Button/Button';
+import Button from '@material-ui/core/Button';
 import Spinner from '../../UI/Spinner/Spinner';
 import Input from '../../UI/Input/Input';
+import TextField from "@material-ui/core/TextField";
 import {updateObject, checkValidity} from '../../../shared/utility';
 import * as actions from '../../../store/actions/index';
-import {connect} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 
 
 const NodsData = props => {
+  const currentTypes = useSelector(state => state.nodesReducer.types);
+  const currentNodes = useSelector(state => state.nodesReducer.nodes);
+
     const [nodeForm, setNodeForm] = useState({
         Nodes: {
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: 'Name the All Nodes Example:X1'
+            placeholder: 'Node Name'
           },
           id: 'node',
           value: '',
@@ -56,10 +61,11 @@ const NodsData = props => {
       const [formIsValid, setFormIsValid] = useState(false);
 
       const inputChangedHandler = (event, inputIdentifier) => {
+        console.log(inputIdentifier)
 
       const updatedFormElement = updateObject(nodeForm[inputIdentifier], {
         value: event.target.value,
-        valid: checkValidity(event.target.value, nodeForm[inputIdentifier].validation),
+        valid: true,
         touched: true
       });
 
@@ -92,9 +98,16 @@ const NodsData = props => {
             formData[formElementIdentifier] = nodeForm[formElementIdentifier].value;
           }
 
-          console.log(formData)
+          console.log("formData", formData)
+          const nodeTypes = {};
+          const types = [...currentNodes, formData].map(item => {
+            nodeTypes[item.NodeType] = nodeTypes[item.NodeType] ? nodeTypes[item.NodeType] + 1 : 1;
+          })
+          console.log("nodeTypes", nodeTypes);
+
           const node = {
               nodeData: formData,
+              typeData: nodeTypes
           }
           props.onSubmitInput(node, props.token);
       }
@@ -103,18 +116,18 @@ const NodsData = props => {
 
     let form = (
       <form  onSubmit={formSubmitHandler}>
-          {formElementsArray.map((formElement) => (
-            <Input
-              key={formElement.id}
-              elementType={formElement.config.elementType}
-              elementConfig={formElement.config.elementConfig}
-              value={formElement.config.value}
-              invalid={!formElement.config.valid}
-              shouldValidate={formElement.config.validation}
-              touched={formElement.config.touched}
-              changed={(event) => inputChangedHandler(event, formElement.id)}
-              ></Input>
-          ))}
+
+          <TextField
+            key={nodeForm.Nodes.id}
+
+            {...nodeForm.Nodes.elementConfig}
+            value={nodeForm.Nodes.value}
+            invalid={!nodeForm.Nodes.valid}
+            shouldValidate={nodeForm.Nodes.validation}
+            touched={nodeForm.Nodes.touched}
+            onChange={(event) => inputChangedHandler(event, nodeForm.Nodes.id)}
+            >
+          </TextField>
 
 
           <Button btnType="Success" >Add Node</Button>

@@ -27,20 +27,8 @@ export const submitInputsStart = () => {
 export const submitInputs = (nodeData, token) => {
   return dispatch => {
     dispatch(submitInputsStart());
-    // axios.post('/nodes.json' + token, nodeData)
-    // .then(response => {
-    //   dispatch(submitInputsSuccess(response.data.name, nodeData))
-    // })
-    // .catch(error => {
-    //   dispatch(submitInputsFail(error))
-    // });
-
-    // const db = firebase.firestore();
-    // const nodeRef = db.collection('nodes');
-    // nodeRef.add({
-    //     ...nodeData
-    // }).then(console.log)
     console.log(nodeData);
+
     dispatch({type: actionTypes.SUBMIT_INPUTS_SUCCESS, payload: nodeData})
     const nodes = localStorage.getItem('nodes');
     if (nodes) {
@@ -60,5 +48,5 @@ export const rebuildNodesFromLocalStorage = () => {
   const types = newNodes.map(item => {
     nodeTypes[item.NodeType] = nodeTypes[item.NodeType] ? nodeTypes[item.NodeType] + 1 : 1;
   })
-  return nodes ? {type: actionTypes.REBUILD_NODES_FROM_LOCAL_STORAGE, payload: {nodes, types: nodeTypes}} : {type: actionTypes.REBUILD_NODES_FROM_LOCAL_STORAGE, payload: {nodes: [], types: []}};
+  return nodes  ? {type: actionTypes.REBUILD_NODES_FROM_LOCAL_STORAGE, payload: {nodes, types: nodeTypes}} : {type: actionTypes.REBUILD_NODES_FROM_LOCAL_STORAGE, payload: {nodes: [], types: []}};
 }

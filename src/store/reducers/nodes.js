@@ -30,7 +30,7 @@ const submitInputsSuccess = (state,action) => {
 const reducer = (state = initialState, action) => {
   switch(action.type) {
     case actionTypes.SUBMIT_INPUTS_SUCCESS:
-      return {...state, nodes: [...state.nodes, action.payload.nodeData]};
+      return {...state, nodes: [...state.nodes, action.payload.nodeData], types: action.payload.typeData};
     case actionTypes.REBUILD_NODES_FROM_LOCAL_STORAGE:
       return {...state, nodes: action.payload.nodes.map(item => item.nodeData), types: action.payload.types};
     case actionTypes.SUBMIT_INPUTS_FAIL: return submitInputsFail(state,action);
