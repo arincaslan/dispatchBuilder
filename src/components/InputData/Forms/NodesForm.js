@@ -158,7 +158,7 @@ const NodsForm = (props) => {
         </div>
       </div>
 
-      <div class="d-flex justify-content-end">
+      <div className="d-flex justify-content-end">
         <Button
           type="submit"
           className="mt-5"

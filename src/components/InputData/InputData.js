@@ -61,8 +61,8 @@ const InputData = (props) => {
               Here you can add new paths and view them in the table.
             </Typography>
             <div className="row">
-              <div className="col-md-6 col-sm-12">
-                <Paper style={{ padding: "15px" }} elevation={2}>
+              <div className="col-md-6 col-sm-12 d-flex justify-content-center align-items-center">
+                <Paper style={{ padding: "30px", width: "100%" }} elevation={2}>
                   <Typography className="mb-3" variant="h5">
                     Create New Path
                   </Typography>

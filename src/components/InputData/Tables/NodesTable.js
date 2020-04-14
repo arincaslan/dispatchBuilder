@@ -40,8 +40,8 @@ const NodesTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
+          {rows.map((row, index) => (
+            <TableRow key={index}>
               <TableCell align="left">{row.Nodes}</TableCell>
               <TableCell align="left">{row.NodeTime}</TableCell>
               <TableCell align="left">{row.NodeType}</TableCell>

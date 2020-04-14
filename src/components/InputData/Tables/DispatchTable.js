@@ -17,34 +17,50 @@ const useStyles = makeStyles({
   },
 });
 
-const PathsTable = () => {
+const DispatchTable = (props) => {
+  const [paths, setPaths] = useState([]);
   const [rows, setRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const paths = useSelector((state) => state.pathsReducer.paths);
   const classes = useStyles();
 
   useEffect(() => {
-    if (paths.length) {
+    if (props.result) {
+      const pathNames = Object.keys(props.result).filter((item) => {
+        if (
+          item !== "bounded" &&
+          item !== "result" &&
+          item !== "feasible" &&
+          item !== "showels"
+        ) {
+          return item;
+        }
+      });
+      const paths = pathNames.map((item) => ({
+        pathName: item,
+        truckPerMin: (props.result[item] * props.result.result).toFixed(3),
+        pathTime: props.result[item].toFixed(3),
+      }));
+      setPaths(paths);
       setRows(paths.slice((currentPage - 1) * 5, currentPage * 5));
     }
-  }, [currentPage, paths]);
+  }, [currentPage, props.result]);
 
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="left">First Node</TableCell>
-            <TableCell align="left">Second Node</TableCell>
-            <TableCell align="left">Time Between</TableCell>
+            <TableCell align="left">Path</TableCell>
+            <TableCell align="left">Trucks/Min</TableCell>
+            <TableCell align="left">Result</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row, index) => (
             <TableRow key={index}>
-              <TableCell align="left">{row.FirstNode}</TableCell>
-              <TableCell align="left">{row.SecondNode}</TableCell>
-              <TableCell align="left">{row.TimeBetweenNodes}</TableCell>
+              <TableCell align="left">{row.pathName}</TableCell>
+              <TableCell align="left">{row.truckPerMin}</TableCell>
+              <TableCell align="left">{row.pathTime}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -60,4 +76,4 @@ const PathsTable = () => {
   );
 };
 
-export default PathsTable;
+export default DispatchTable;

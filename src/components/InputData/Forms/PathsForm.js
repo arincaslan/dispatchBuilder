@@ -155,8 +155,10 @@ const PathsData = (props) => {
               value={pathForm.FirstNode.value}
               onChange={(e) => inputChangedHandler(e, "FirstNode")}
             >
-              {nodes.map((node) => (
-                <option value={node.Nodes}>{node.Nodes}</option>
+              {nodes.map((node, index) => (
+                <option key={index} value={node.Nodes}>
+                  {node.Nodes}
+                </option>
               ))}
             </Select>
           </FormControl>
@@ -169,8 +171,10 @@ const PathsData = (props) => {
               value={pathForm.SecondNode.value}
               onChange={(e) => inputChangedHandler(e, "SecondNode")}
             >
-              {nodes.map((node) => (
-                <option value={node.Nodes}>{node.Nodes}</option>
+              {nodes.map((node, index) => (
+                <option key={index} value={node.Nodes}>
+                  {node.Nodes}
+                </option>
               ))}
             </Select>
           </FormControl>
@@ -188,7 +192,7 @@ const PathsData = (props) => {
         </div>
       </div>
 
-      <div class="d-flex justify-content-end">
+      <div className="d-flex justify-content-end">
         <Button
           type="submit"
           className="mt-5"
