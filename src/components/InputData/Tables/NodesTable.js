@@ -10,12 +10,10 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Pagination from "@material-ui/lab/Pagination";
-import { IconButton } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+import { IconButton } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 // actions
-import * as actions from '../../../store/actions/index';
-
-
+import * as actions from "../../../store/actions/index";
 
 const useStyles = makeStyles({
   table: {
@@ -55,7 +53,19 @@ const NodesTable = () => {
               <TableCell align="left">{row.Nodes}</TableCell>
               <TableCell align="left">{row.NodeTime}</TableCell>
               <TableCell align="left">{row.NodeType}</TableCell>
-              <IconButton onClick={(id) => dispatch(actions.removeNode( {Nodes: row.Nodes, NodeTime: row.NodeTime, NodeType: row.NodeType}))} aria-label="delete"  color="secondary">
+              <IconButton
+                onClick={(id) =>
+                  dispatch(
+                    actions.removeNode({
+                      Nodes: row.Nodes,
+                      NodeTime: row.NodeTime,
+                      NodeType: row.NodeType,
+                    })
+                  )
+                }
+                aria-label="delete"
+                color="danger"
+              >
                 <DeleteIcon />
               </IconButton>
             </TableRow>

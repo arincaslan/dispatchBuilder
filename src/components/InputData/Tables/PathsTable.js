@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector , useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // MATERIAL UI
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -10,10 +10,10 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Pagination from "@material-ui/lab/Pagination";
-import { IconButton } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+import { IconButton } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 //actions
-import * as actions from '../../../store/actions/index';
+import * as actions from "../../../store/actions/index";
 
 const useStyles = makeStyles({
   table: {
@@ -32,7 +32,7 @@ const PathsTable = () => {
     if (paths.length) {
       setRows(paths.slice((currentPage - 1) * 5, currentPage * 5));
     } else {
-      setRows([])
+      setRows([]);
     }
   }, [currentPage, paths]);
 
@@ -53,9 +53,13 @@ const PathsTable = () => {
               <TableCell align="left">{row.FirstNode}</TableCell>
               <TableCell align="left">{row.SecondNode}</TableCell>
               <TableCell align="left">{row.TimeBetweenNodes}</TableCell>
-                <IconButton onClick={(id) => dispatch(actions.removePath(row))} aria-label="delete"  color="secondary">
-                  <DeleteIcon />
-                </IconButton>
+              <IconButton
+                onClick={(id) => dispatch(actions.removePath(row))}
+                aria-label="delete"
+                color="danger"
+              >
+                <DeleteIcon />
+              </IconButton>
             </TableRow>
           ))}
         </TableBody>

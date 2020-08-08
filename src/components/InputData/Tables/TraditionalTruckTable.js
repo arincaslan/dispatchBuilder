@@ -10,11 +10,13 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Pagination from "@material-ui/lab/Pagination";
-import { IconButton } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+import { IconButton } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
+import Tooltip from "@material-ui/core/Tooltip";
+import InfoIcon from "@material-ui/icons/Info";
+import TraditionalTruckForm from "../Forms/TraditionalTruckForm";
 
-import * as actions from '../../../store/actions/index';
-
+import * as actions from "../../../store/actions/index";
 
 const useStyles = makeStyles({
   table: {
@@ -28,8 +30,41 @@ const TraditionalTruckTable = () => {
   const trucks = useSelector((state) => state.trucksReducer.trucks);
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [truck, setTruck] = useState([]);
 
   useEffect(() => {
+    if (trucks.length) {
+      for (let i = 0; i < trucks.length; i++) {
+        const yearlyStrippingRate = trucks[i]["YearlyStrippingRate"];
+        const bucketStuffingFactor = trucks[i]["BucketStuffingFactor"];
+        const workplaceEfficiency = trucks[i]["WorkplaceEfficiency"];
+        const rockSwellFactor = trucks[i]["RockSwellFactor"];
+        const bucketPeriod = trucks[i]["BucketPeriod"];
+        const bucketVolume = trucks[i]["BucketVolume"];
+        const truckTonnage = trucks[i]["TruckTonnage"];
+        const materialDensity = trucks[i]["MaterialDensity"];
+        const soilBlisteringFactor = trucks[i]["SoilBlisteringFactor"];
+        const unloadingTime = trucks[i]["UnloadingTime"];
+        const meanTravelTime = trucks[i]["MeanTravelTime"];
+        const driverFactor = trucks[i]["DriverFactor"];
+
+        const traditionalTruckVars = {
+          YearlyStrippingRate: yearlyStrippingRate,
+          BucketStuffingFactor: bucketStuffingFactor,
+          WorkplaceEfficiency: workplaceEfficiency,
+          RockSwellFactor: rockSwellFactor,
+          BucketPeriod: bucketPeriod,
+          BucketVolume: bucketVolume,
+          TruckTonnage: truckTonnage,
+          MaterialDensity: materialDensity,
+          SoilBlisteringFactor: soilBlisteringFactor,
+          UnloadingTime: unloadingTime,
+          MeanTravelTime: meanTravelTime,
+          DriverFactor: driverFactor,
+        };
+        setTruck(traditionalTruckVars);
+      }
+    }
     if (trucks.length) {
       setRows(trucks.slice((currentPage - 1) * 5, currentPage * 5));
     } else {
@@ -37,62 +72,94 @@ const TraditionalTruckTable = () => {
     }
   }, [currentPage, trucks]);
 
-
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="left">Yearly Stripping Rate</TableCell>
-            <TableCell align="left">Bucket Stuffing Factor</TableCell>
-            <TableCell align="left">Workplace Efficiency</TableCell>
-            <TableCell align="left">Rock Swell Factor</TableCell>
-            <TableCell align="left">Bucket Period</TableCell>
-            <TableCell align="left">Truck Tonnage</TableCell>
-            <TableCell align="left">Truck Volume</TableCell>
-            <TableCell align="left">Material Density</TableCell>
-            <TableCell align="left">Soil Blistering Factor</TableCell>
-            <TableCell align="left">Unloading Time</TableCell>
-            <TableCell align="left">Mean Travel Time</TableCell>
-            <TableCell align="left">Driver Factor</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row, index) => (
-            <TableRow key={index}>
-              <TableCell align="left">{row.YearlyStrippingRate}</TableCell>
-              <TableCell align="left">{row.BucketStuffingFactor}</TableCell>
-              <TableCell align="left">{row.WorkplaceEfficiency}</TableCell>
-              <TableCell align="left">{row.RockSwellFactor}</TableCell>
-              <TableCell align="left">{row.BucketPeriod}</TableCell>
-              <TableCell align="left">{row.BucketVolume}</TableCell>
-              <TableCell align="left">{row.TruckTonnage}</TableCell>
-              <TableCell align="left">{row.MaterialDensity}</TableCell>
-              <TableCell align="left">{row.SoilBlisteringFactor}</TableCell>
-              <TableCell align="left">{row.UnloadingTime}</TableCell>
-              <TableCell align="left">{row.MeanTravelTime}</TableCell>
-              <TableCell align="left">{row.DriverFactor}</TableCell>
-              <IconButton onClick={(id) => dispatch(actions.removeTruck({
-                  YearlyStrippingRate: row.YearlyStrippingRate,
-                  BucketStuffingFactor: row.BucketStuffingFactor,
-                  WorkplaceEfficiency: row.WorkplaceEfficiency,
-                  RockSwellFactor: row.RockSwellFactor,
-                  BucketPeriod: row.BucketPeriod,
-                  BucketVolume: row.BucketVolume,
-                  TruckTonnage: row.TruckTonnage,
-                  MaterialDensity: row.MaterialDensity,
-                  SoilBlisteringFactor: row.SoilBlisteringFactor,
-                  UnloadingTime: row.UnloadingTime,
-                  MeanTravelTime: row.MeanTravelTime,
-                  DriverFactor: row.DriverFactor,
-                }))} aria-label="delete"  color="secondary">
-                <DeleteIcon />
-              </IconButton>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <div className="row">
+        <div className="col-md-6 col-sm-12">
+          <div className="d-flex justify-content-between align-items-center">
+            <p style={{ fontWeight: 400 }}>
+              Truck Header Data{" "}
+              <Tooltip title="deneme" placement="top">
+                <InfoIcon style={{ color: "#767676", cursor: "pointer" }} />
+              </Tooltip>
+            </p>
+            <p style={{ fontWeight: 300 }}>Data Result</p>
+          </div>
+        </div>
+      </div>
+      <div className="col-md-6 col-sm-12">
+        <div className="d-flex justify-content-between align-items-center">
+          <p style={{ fontWeight: 400 }}>Yearly Stripping Rate</p>
+          <p style={{ fontWeight: 300 }}>{truck.YearlyStrippingRate}</p>
+        </div>
+      </div>
+      <div className="col-md-6 col-sm-12">
+        <div className="d-flex justify-content-between align-items-center">
+          <p style={{ fontWeight: 400 }}>Bucket Stuffing Factor</p>
+          <p style={{ fontWeight: 300 }}>{truck.BucketStuffingFactor}</p>
+        </div>
+      </div>
+      <div className="col-md-6 col-sm-12">
+        <div className="d-flex justify-content-between align-items-center">
+          <p style={{ fontWeight: 400 }}>Workplace Efficiency</p>
+          <p style={{ fontWeight: 300 }}>{truck.WorkplaceEfficiency}</p>
+        </div>
+      </div>
+      <div className="col-md-6 col-sm-12">
+        <div className="d-flex justify-content-between align-items-center">
+          <p style={{ fontWeight: 400 }}>Rock Swell Factor</p>
+          <p style={{ fontWeight: 300 }}>{truck.RockSwellFactor}</p>
+        </div>
+      </div>
+      <div className="col-md-6 col-sm-12">
+        <div className="d-flex justify-content-between align-items-center">
+          <p style={{ fontWeight: 400 }}>Bucket Period</p>
+          <p style={{ fontWeight: 300 }}>{truck.BucketPeriod}</p>
+        </div>
+      </div>
+      <div className="col-md-6 col-sm-12">
+        <div className="d-flex justify-content-between align-items-center">
+          <p style={{ fontWeight: 400 }}>Bucket Volume</p>
+          <p style={{ fontWeight: 300 }}>{truck.BucketVolume}</p>
+        </div>
+      </div>
+      <div className="col-md-6 col-sm-12">
+        <div className="d-flex justify-content-between align-items-center">
+          <p style={{ fontWeight: 400 }}>Truck Tonnage</p>
+          <p style={{ fontWeight: 300 }}>{truck.TruckTonnage}</p>
+        </div>
+      </div>
+      <div className="col-md-6 col-sm-12">
+        <div className="d-flex justify-content-between align-items-center">
+          <p style={{ fontWeight: 400 }}>Material Density</p>
+          <p style={{ fontWeight: 300 }}>{truck.MaterialDensity}</p>
+        </div>
+      </div>
+      <div className="col-md-6 col-sm-12">
+        <div className="d-flex justify-content-between align-items-center">
+          <p style={{ fontWeight: 400 }}>Soil Blistering Factor</p>
+          <p style={{ fontWeight: 300 }}>{truck.SoilBlisteringFactor}</p>
+        </div>
+      </div>
+      <div className="col-md-6 col-sm-12">
+        <div className="d-flex justify-content-between align-items-center">
+          <p style={{ fontWeight: 400 }}>Unloading Time</p>
+          <p style={{ fontWeight: 300 }}>{truck.UnloadingTime}</p>
+        </div>
+      </div>
+      <div className="col-md-6 col-sm-12">
+        <div className="d-flex justify-content-between align-items-center">
+          <p style={{ fontWeight: 400 }}>Mean Travel Time</p>
+          <p style={{ fontWeight: 300 }}>{truck.MeanTravelTime}</p>
+        </div>
+      </div>
+      <div className="col-md-6 col-sm-12">
+        <div className="d-flex justify-content-between align-items-center">
+          <p style={{ fontWeight: 400 }}>Driver Factor</p>
+          <p style={{ fontWeight: 300 }}>{truck.DriverFactor}</p>
+        </div>
+      </div>
+    </>
   );
 };
 

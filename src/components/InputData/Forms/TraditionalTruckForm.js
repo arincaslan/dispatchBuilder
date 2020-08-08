@@ -26,9 +26,9 @@ const TraditionalTruckForm = (props) => {
       id: "YSR",
       value: "",
       validation: {
-        required: false,
+        required: true,
       },
-      valid: true,
+      valid: false,
       touched: false,
     },
     BucketStuffingFactor: {
@@ -39,9 +39,9 @@ const TraditionalTruckForm = (props) => {
       },
       value: "",
       validation: {
-        required: false,
+        required: true,
       },
-      valid: true,
+      valid: false,
       touched: false,
     },
     WorkplaceEfficiency: {
@@ -463,6 +463,7 @@ const TraditionalTruckForm = (props) => {
 
       <div className="d-flex justify-content-end">
         <Button
+          // disabled={!formIsValid}
           type="submit"
           className="mt-5"
           variant="contained"
