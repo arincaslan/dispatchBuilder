@@ -6,6 +6,8 @@ import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import TextField from "@material-ui/core/TextField";
+import Tooltip from "@material-ui/core/Tooltip";
+import InfoIcon from "@material-ui/icons/Info";
 
 import Spinner from "../../UI/Spinner/Spinner";
 import Input from "../../UI/Input/Input";
@@ -14,7 +16,6 @@ import * as actions from "../../../store/actions/index";
 import { connect, useSelector } from "react-redux";
 
 const TraditionalTruckForm = (props) => {
-
   const [traditionalTruckForm, setTraditionalTruckForm] = useState({
     YearlyStrippingRate: {
       elementType: "input",
@@ -22,7 +23,7 @@ const TraditionalTruckForm = (props) => {
         type: "number",
         placeholder: "Yearly Stripping Rate",
       },
-      id: 'YSR',
+      id: "YSR",
       value: "",
       validation: {
         required: false,
@@ -193,9 +194,9 @@ const TraditionalTruckForm = (props) => {
 
     const formData = {};
     for (let formElementIdentifier in traditionalTruckForm) {
-      formData[formElementIdentifier] = traditionalTruckForm[formElementIdentifier].value;
+      formData[formElementIdentifier] =
+        traditionalTruckForm[formElementIdentifier].value;
     }
-
 
     const traditionalTruckData = {
       truckData: formData,
@@ -207,103 +208,258 @@ const TraditionalTruckForm = (props) => {
     <form onSubmit={formSubmitHandler}>
       <div className="row">
         <div className="col-md-6 col-sm-12">
-          <TextField
-            className="w-100"
-            {...traditionalTruckForm.YearlyStrippingRate.elementConfig}
-            value={traditionalTruckForm.YearlyStrippingRate.value}
-            onChange={(event) => inputChangedHandler(event, "YearlyStrippingRate")}
-          ></TextField>
+          <div className="d-flex align-items-center mt-3">
+            <TextField
+              {...traditionalTruckForm.YearlyStrippingRate.elementConfig}
+              value={traditionalTruckForm.YearlyStrippingRate.value}
+              onChange={(event) =>
+                inputChangedHandler(event, "YearlyStrippingRate")
+              }
+              style={{ flexGrow: 1 }}
+            ></TextField>
+            <Tooltip title="deneme deneme" placement="top">
+              <InfoIcon
+                style={{
+                  cursor: "pointer",
+                  color: "#767676",
+                  marginLeft: "5px",
+                  marginTop: "7px",
+                }}
+              />
+            </Tooltip>
+          </div>
         </div>
         <div className="col-md-6 col-sm-12">
-          <TextField
-            className="w-100"
-            {...traditionalTruckForm.BucketStuffingFactor.elementConfig}
-            value={traditionalTruckForm.BucketStuffingFactor.value}
-            onChange={(event) => inputChangedHandler(event, "BucketStuffingFactor")}
-          ></TextField>
+          <div className="d-flex align-items-center mt-3">
+            <TextField
+              {...traditionalTruckForm.BucketStuffingFactor.elementConfig}
+              value={traditionalTruckForm.BucketStuffingFactor.value}
+              onChange={(event) =>
+                inputChangedHandler(event, "BucketStuffingFactor")
+              }
+              style={{ flexGrow: 1 }}
+            ></TextField>
+            <Tooltip title="deneme deneme" placement="top">
+              <InfoIcon
+                style={{
+                  cursor: "pointer",
+                  color: "#767676",
+                  marginLeft: "5px",
+                  marginTop: "7px",
+                }}
+              />
+            </Tooltip>
+          </div>
         </div>
         <div className="col-md-6 col-sm-12">
-          <TextField
-            className="w-100"
-            {...traditionalTruckForm.WorkplaceEfficiency.elementConfig}
-            value={traditionalTruckForm.WorkplaceEfficiency.value}
-            onChange={(event) => inputChangedHandler(event, "WorkplaceEfficiency")}
-          ></TextField>
+          <div className="d-flex align-items-center mt-3">
+            <TextField
+              {...traditionalTruckForm.WorkplaceEfficiency.elementConfig}
+              value={traditionalTruckForm.WorkplaceEfficiency.value}
+              onChange={(event) =>
+                inputChangedHandler(event, "WorkplaceEfficiency")
+              }
+              style={{ flexGrow: 1 }}
+            ></TextField>
+            <Tooltip title="deneme deneme" placement="top">
+              <InfoIcon
+                style={{
+                  cursor: "pointer",
+                  color: "#767676",
+                  marginLeft: "5px",
+                  marginTop: "7px",
+                }}
+              />
+            </Tooltip>
+          </div>
         </div>
         <div className="col-md-6 col-sm-12">
-          <TextField
-            className="w-100"
-            {...traditionalTruckForm.RockSwellFactor.elementConfig}
-            value={traditionalTruckForm.RockSwellFactor.value}
-            onChange={(event) => inputChangedHandler(event, "RockSwellFactor")}
-          ></TextField>
+          <div className="d-flex align-items-center mt-3">
+            <TextField
+              {...traditionalTruckForm.RockSwellFactor.elementConfig}
+              value={traditionalTruckForm.RockSwellFactor.value}
+              onChange={(event) =>
+                inputChangedHandler(event, "RockSwellFactor")
+              }
+              style={{ flexGrow: 1 }}
+            ></TextField>
+            <Tooltip title="deneme deneme" placement="top">
+              <InfoIcon
+                style={{
+                  cursor: "pointer",
+                  color: "#767676",
+                  marginLeft: "5px",
+                  marginTop: "7px",
+                }}
+              />
+            </Tooltip>
+          </div>
         </div>
         <div className="col-md-6 col-sm-12">
-          <TextField
-            className="w-100"
-            {...traditionalTruckForm.BucketPeriod.elementConfig}
-            value={traditionalTruckForm.BucketPeriod.value}
-            onChange={(event) => inputChangedHandler(event, "BucketPeriod")}
-          ></TextField>
+          <div className="d-flex align-items-center mt-3">
+            <TextField
+              {...traditionalTruckForm.BucketPeriod.elementConfig}
+              value={traditionalTruckForm.BucketPeriod.value}
+              onChange={(event) => inputChangedHandler(event, "BucketPeriod")}
+              style={{ flexGrow: 1 }}
+            ></TextField>
+            <Tooltip title="deneme deneme" placement="top">
+              <InfoIcon
+                style={{
+                  cursor: "pointer",
+                  color: "#767676",
+                  marginLeft: "5px",
+                  marginTop: "7px",
+                }}
+              />
+            </Tooltip>
+          </div>
         </div>
         <div className="col-md-6 col-sm-12">
-          <TextField
-            className="w-100"
-            {...traditionalTruckForm.BucketVolume.elementConfig}
-            value={traditionalTruckForm.BucketVolume.value}
-            onChange={(event) => inputChangedHandler(event, "BucketVolume")}
-          ></TextField>
+          <div className="d-flex align-items-center mt-3">
+            <TextField
+              {...traditionalTruckForm.BucketVolume.elementConfig}
+              value={traditionalTruckForm.BucketVolume.value}
+              onChange={(event) => inputChangedHandler(event, "BucketVolume")}
+              style={{ flexGrow: 1 }}
+            ></TextField>
+            <Tooltip title="deneme deneme" placement="top">
+              <InfoIcon
+                style={{
+                  cursor: "pointer",
+                  color: "#767676",
+                  marginLeft: "5px",
+                  marginTop: "7px",
+                }}
+              />
+            </Tooltip>
+          </div>
         </div>
         <div className="col-md-6 col-sm-12">
-          <TextField
-            className="w-100"
-            {...traditionalTruckForm.TruckTonnage.elementConfig}
-            value={traditionalTruckForm.TruckTonnage.value}
-            onChange={(event) => inputChangedHandler(event, "TruckTonnage")}
-          ></TextField>
+          <div className="d-flex align-items-center mt-3">
+            <TextField
+              {...traditionalTruckForm.TruckTonnage.elementConfig}
+              value={traditionalTruckForm.TruckTonnage.value}
+              onChange={(event) => inputChangedHandler(event, "TruckTonnage")}
+              style={{ flexGrow: 1 }}
+            ></TextField>
+            <Tooltip title="deneme deneme" placement="top">
+              <InfoIcon
+                style={{
+                  cursor: "pointer",
+                  color: "#767676",
+                  marginLeft: "5px",
+                  marginTop: "7px",
+                }}
+              />
+            </Tooltip>
+          </div>
         </div>
         <div className="col-md-6 col-sm-12">
-          <TextField
-            className="w-100"
-            {...traditionalTruckForm.MaterialDensity.elementConfig}
-            value={traditionalTruckForm.MaterialDensity.value}
-            onChange={(event) => inputChangedHandler(event, "MaterialDensity")}
-          ></TextField>
+          <div className="d-flex align-items-center mt-3">
+            <TextField
+              {...traditionalTruckForm.MaterialDensity.elementConfig}
+              value={traditionalTruckForm.MaterialDensity.value}
+              onChange={(event) =>
+                inputChangedHandler(event, "MaterialDensity")
+              }
+              style={{ flexGrow: 1 }}
+            ></TextField>
+            <Tooltip title="deneme deneme" placement="top">
+              <InfoIcon
+                style={{
+                  cursor: "pointer",
+                  color: "#767676",
+                  marginLeft: "5px",
+                  marginTop: "7px",
+                }}
+              />
+            </Tooltip>
+          </div>
         </div>
         <div className="col-md-6 col-sm-12">
-          <TextField
-            className="w-100"
-            {...traditionalTruckForm.SoilBlisteringFactor.elementConfig}
-            value={traditionalTruckForm.SoilBlisteringFactor.value}
-            onChange={(event) => inputChangedHandler(event, "SoilBlisteringFactor")}
-          ></TextField>
+          <div className="d-flex align-items-center mt-3">
+            <TextField
+              {...traditionalTruckForm.SoilBlisteringFactor.elementConfig}
+              value={traditionalTruckForm.SoilBlisteringFactor.value}
+              onChange={(event) =>
+                inputChangedHandler(event, "SoilBlisteringFactor")
+              }
+              style={{ flexGrow: 1 }}
+            ></TextField>
+            <Tooltip title="deneme deneme" placement="top">
+              <InfoIcon
+                style={{
+                  cursor: "pointer",
+                  color: "#767676",
+                  marginLeft: "5px",
+                  marginTop: "7px",
+                }}
+              />
+            </Tooltip>
+          </div>
         </div>
         <div className="col-md-6 col-sm-12">
-          <TextField
-            className="w-100"
-            {...traditionalTruckForm.UnloadingTime.elementConfig}
-            value={traditionalTruckForm.UnloadingTime.value}
-            onChange={(event) => inputChangedHandler(event, "UnloadingTime")}
-          ></TextField>
+          <div className="d-flex align-items-center mt-3">
+            <TextField
+              {...traditionalTruckForm.UnloadingTime.elementConfig}
+              value={traditionalTruckForm.UnloadingTime.value}
+              onChange={(event) => inputChangedHandler(event, "UnloadingTime")}
+              style={{ flexGrow: 1 }}
+            ></TextField>
+            <Tooltip title="deneme deneme" placement="top">
+              <InfoIcon
+                style={{
+                  cursor: "pointer",
+                  color: "#767676",
+                  marginLeft: "5px",
+                  marginTop: "7px",
+                }}
+              />
+            </Tooltip>
+          </div>
         </div>
         <div className="col-md-6 col-sm-12">
-          <TextField
-            className="w-100"
-            {...traditionalTruckForm.MeanTravelTime.elementConfig}
-            value={traditionalTruckForm.MeanTravelTime.value}
-            onChange={(event) => inputChangedHandler(event, "MeanTravelTime")}
-          ></TextField>
+          <div className="d-flex align-items-center mt-3">
+            <TextField
+              {...traditionalTruckForm.MeanTravelTime.elementConfig}
+              value={traditionalTruckForm.MeanTravelTime.value}
+              onChange={(event) => inputChangedHandler(event, "MeanTravelTime")}
+              style={{ flexGrow: 1 }}
+            ></TextField>
+            <Tooltip title="deneme deneme" placement="top">
+              <InfoIcon
+                style={{
+                  cursor: "pointer",
+                  color: "#767676",
+                  marginLeft: "5px",
+                  marginTop: "7px",
+                }}
+              />
+            </Tooltip>
+          </div>
         </div>
         <div className="col-md-6 col-sm-12">
-          <TextField
-            className="w-100"
-            {...traditionalTruckForm.DriverFactor.elementConfig}
-            value={traditionalTruckForm.DriverFactor.value}
-            onChange={(event) => inputChangedHandler(event, "DriverFactor")}
-          ></TextField>
+          <div className="d-flex align-items-center mt-3">
+            <TextField
+              {...traditionalTruckForm.DriverFactor.elementConfig}
+              value={traditionalTruckForm.DriverFactor.value}
+              onChange={(event) => inputChangedHandler(event, "DriverFactor")}
+              style={{ flexGrow: 1 }}
+            ></TextField>
+            <Tooltip title="deneme deneme" placement="top">
+              <InfoIcon
+                style={{
+                  cursor: "pointer",
+                  color: "#767676",
+                  marginLeft: "5px",
+                  marginTop: "7px",
+                }}
+              />
+            </Tooltip>
+          </div>
         </div>
       </div>
-
 
       <div className="d-flex justify-content-end">
         <Button

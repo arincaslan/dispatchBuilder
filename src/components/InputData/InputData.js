@@ -11,6 +11,8 @@ import { useSelector } from "react-redux";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import Tooltip from "@material-ui/core/Tooltip";
+import InfoIcon from "@material-ui/icons/Info";
 
 const InputData = (props) => {
   const nodes = useSelector((state) => state.nodesReducer.nodes);
@@ -20,9 +22,21 @@ const InputData = (props) => {
       <div className="row">
         <div className="col-12">
           <Paper style={{ padding: "25px" }} elevation={4}>
-            <Typography variant="h4" gutterBottom>
-              Nodes
-            </Typography>
+            <div className="d-flex align-items-center mt-3">
+              <Typography variant="h4" gutterBottom>
+                Nodes
+              </Typography>
+              <Tooltip title="deneme deneme" placement="right-end">
+                <InfoIcon
+                  style={{
+                    cursor: "pointer",
+                    color: "#767676",
+                    marginLeft: "15px",
+                    marginBottom: "5px",
+                  }}
+                />
+              </Tooltip>
+            </div>
             <Typography
               style={{ color: "#767676" }}
               variant="subtitle1"
@@ -50,9 +64,21 @@ const InputData = (props) => {
       <div className="row mt-5">
         <div className="col-12">
           <Paper style={{ padding: "25px" }} elevation={4}>
-            <Typography variant="h4" gutterBottom>
-              Paths
-            </Typography>
+            <div className="d-flex align-items-center mt-3">
+              <Typography variant="h4" gutterBottom>
+                Paths
+              </Typography>
+              <Tooltip title="deneme deneme" placement="right-end">
+                <InfoIcon
+                  style={{
+                    cursor: "pointer",
+                    color: "#767676",
+                    marginLeft: "15px",
+                    marginBottom: "5px",
+                  }}
+                />
+              </Tooltip>
+            </div>
             <Typography
               style={{ color: "#767676" }}
               variant="subtitle1"

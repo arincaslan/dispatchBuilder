@@ -5,13 +5,16 @@ import { useDispatch } from "react-redux";
 import DispatchBuilder from "./containers/DispatchBuilder/DispatchBuilder";
 import InputData from "./components/InputData/InputData";
 import TraditionalTruckData from "./components/InputData/TraditionalTruckData";
-import HomePage from './containers/HomePage/HomePage';
+import HomePage from "./containers/HomePage/HomePage";
 import Layout from "./hoc/Layout/Layout";
 import { rebuildNodesFromLocalStorage } from "./store/actions/nodes";
 import { rebuildPathsFromLocalStorage } from "./store/actions/paths";
 import { rebuildTrucksFromLocalStorage } from "./store/actions/trucks";
 import { Route, Switch, Redirect } from "react-router-dom";
 import LoginPage from "./containers/LoginPage/LoginPage";
+// import "./assets/vendor/amchart-core";
+// import "./assets/vendor/amchart";
+// import "./assets/vendor/animated";
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
@@ -67,17 +70,14 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-
-        <Switch>
-
-          <Route path="/" exact component={LoginPage} />
-          <Layout>
-              <Route path="/dispatchbuilder" exact component={InputData} />
-              <Route path="/truckbuilder" exact component={TraditionalTruckData} />
-              <Route path="/results" exact component={DispatchBuilder} />
-          </Layout>
-        </Switch>
-
+      <Switch>
+        <Route path="/" exact component={LoginPage} />
+        <Layout>
+          <Route path="/dispatchbuilder" exact component={InputData} />
+          <Route path="/truckbuilder" exact component={TraditionalTruckData} />
+          <Route path="/results" exact component={DispatchBuilder} />
+        </Layout>
+      </Switch>
     </ThemeProvider>
   );
 }

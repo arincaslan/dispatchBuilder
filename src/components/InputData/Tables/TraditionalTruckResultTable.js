@@ -25,23 +25,24 @@ const TraditionalTruckResultTable = (props) => {
 
   useEffect(() => {
     if (props.traditionalTruckResults) {
-      const resVals = Object.values(props.traditionalTruckResults);
-      console.log(resVals)
+      console.log("traditional results", props.traditionalTruckResults)
+      const resVals = Object.entries(props.traditionalTruckResults).map(([key, val]) => ({key, val}));
+      setRows(resVals);
       const tabledResVals = resVals.map((item) => ({
         resVal: props.traditionalTruckResults[item],
       }))
     }
 
-    if (props.traditionalTruckResults) {
-      const resNames = Object.keys(props.traditionalTruckResults).filter((item) => {
-          return item;
-      });
-      const trucks = resNames.map((item) => ({
-        resName: item,
-      }));
-      setTrucks(trucks);
-      setRows(trucks.slice((currentPage - 1) * 5, currentPage * 5));
-    }
+    // if (props.traditionalTruckResults) {
+    //   const resNames = Object.keys(props.traditionalTruckResults).filter((item) => {
+    //       return item;
+    //   });
+    //   const trucks = resNames.map((item) => ({
+    //     resName: item,
+    //   }));
+    //   setTrucks(trucks);
+    //   setRows(trucks.slice((currentPage - 1) * 5, currentPage * 5));
+    // }
   }, [currentPage, props.traditionalTruckResults]);
 
 
@@ -57,7 +58,8 @@ const TraditionalTruckResultTable = (props) => {
         <TableBody>
           {rows.map((row, index) => (
             <TableRow key={index}>
-              <TableCell align="left">{row.resName}</TableCell>
+              <TableCell align="left">{row.key}</TableCell>
+              <TableCell align="left">{row.val}</TableCell>
             </TableRow>
           ))}
         </TableBody>
