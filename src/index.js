@@ -9,24 +9,36 @@ import {createStore, applyMiddleware, compose, combineReducers} from 'redux';
 import thunk from 'redux-thunk';
 import nodesReducer from './store/reducers/nodes';
 import pathsReducer from './store/reducers/paths';
+import userReducer from "./store/reducers/user";
+import trucksReducer from "./store/reducers/trucks";
 import { BrowserRouter } from 'react-router-dom';
+import { connectRouter } from 'connected-react-router';
+import { routerMiddleware } from 'connected-react-router';
+import { createBrowserHistory } from 'history';
+import { ConnectedRouter } from 'connected-react-router'
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
+const history = createBrowserHistory()
 
 const rootReducer = combineReducers({
+  router: connectRouter(history),
   nodesReducer: nodesReducer,
-  pathsReducer: pathsReducer
+  pathsReducer: pathsReducer,
+  userReducer: userReducer,
+  trucksReducer: trucksReducer,
 })
 
 const store = createStore(rootReducer, composeEnhancers(
-  applyMiddleware(thunk)
+  applyMiddleware(routerMiddleware(history), thunk)
 ));
 
 const app = (
   <Provider store={store}>
-    <BrowserRouter>
+    <ConnectedRouter history={history}>
+
       <App />
-    </BrowserRouter>
+
+    </ConnectedRouter>
   </Provider>
 );
 

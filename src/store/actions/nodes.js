@@ -24,6 +24,20 @@ export const submitInputsStart = () => {
   }
 }
 
+export const removeNode = (selectedNode) => {
+  const nodesFromLocalStorage = JSON.parse(localStorage.getItem("nodes")).map(item => item.nodeData).filter(item => item.Nodes !== selectedNode.Nodes).map(item => ({nodeData: item}));
+  localStorage.setItem("nodes", JSON.stringify(nodesFromLocalStorage));
+  const pathsFromLocalStorage = JSON.parse(localStorage.getItem("paths")).filter(item => !(item.FirstNode === selectedNode.Nodes || item.SecondNode === selectedNode.Nodes) && item);
+  localStorage.setItem("paths", JSON.stringify(pathsFromLocalStorage));
+  return {
+    type: actionTypes.REMOVE_NODE,
+    payload: selectedNode
+  }
+}
+
+
+
+
 export const submitInputs = (nodeData, token) => {
   return dispatch => {
     dispatch(submitInputsStart());

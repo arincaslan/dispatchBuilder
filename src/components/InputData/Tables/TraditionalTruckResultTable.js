@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector , useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 // MATERIAL UI
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -10,10 +10,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Pagination from "@material-ui/lab/Pagination";
-import { IconButton } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
-//actions
-import * as actions from '../../../store/actions/index';
 
 const useStyles = makeStyles({
   table: {
@@ -21,41 +17,47 @@ const useStyles = makeStyles({
   },
 });
 
-const PathsTable = () => {
+const TraditionalTruckResultTable = (props) => {
   const [rows, setRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const paths = useSelector((state) => state.pathsReducer.paths);
   const classes = useStyles();
-  const dispatch = useDispatch();
+  const [trucks, setTrucks] = useState([]);
 
   useEffect(() => {
-    if (paths.length) {
-      setRows(paths.slice((currentPage - 1) * 5, currentPage * 5));
-    } else {
-      setRows([])
+    if (props.traditionalTruckResults) {
+      const resVals = Object.values(props.traditionalTruckResults);
+      console.log(resVals)
+      const tabledResVals = resVals.map((item) => ({
+        resVal: props.traditionalTruckResults[item],
+      }))
     }
-  }, [currentPage, paths]);
+
+    if (props.traditionalTruckResults) {
+      const resNames = Object.keys(props.traditionalTruckResults).filter((item) => {
+          return item;
+      });
+      const trucks = resNames.map((item) => ({
+        resName: item,
+      }));
+      setTrucks(trucks);
+      setRows(trucks.slice((currentPage - 1) * 5, currentPage * 5));
+    }
+  }, [currentPage, props.traditionalTruckResults]);
+
 
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="left">First Node</TableCell>
-            <TableCell align="left">Second Node</TableCell>
-            <TableCell align="left">Time Between Nodes</TableCell>
-            <TableCell align="left">Delete Path</TableCell>
+            <TableCell align="left">Calculated Values</TableCell>
+            <TableCell align="left">Results</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row, index) => (
             <TableRow key={index}>
-              <TableCell align="left">{row.FirstNode}</TableCell>
-              <TableCell align="left">{row.SecondNode}</TableCell>
-              <TableCell align="left">{row.TimeBetweenNodes}</TableCell>
-                <IconButton onClick={(id) => dispatch(actions.removePath(row))} aria-label="delete"  color="secondary">
-                  <DeleteIcon />
-                </IconButton>
+              <TableCell align="left">{row.resName}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -63,12 +65,16 @@ const PathsTable = () => {
       <Pagination
         className="pt-2 pb-2 pl-2"
         color="primary"
-        count={Math.ceil(paths.length / 5)}
+        count={Math.ceil(trucks.length / 5)}
         variant="outlined"
         onChange={(e, value) => setCurrentPage(value)}
       />
+
     </TableContainer>
+
+
+
   );
 };
 
-export default PathsTable;
+export default TraditionalTruckResultTable;

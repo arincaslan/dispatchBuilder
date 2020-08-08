@@ -4,10 +4,14 @@ import * as firebase from "firebase/app";
 import { useDispatch } from "react-redux";
 import DispatchBuilder from "./containers/DispatchBuilder/DispatchBuilder";
 import InputData from "./components/InputData/InputData";
+import TraditionalTruckData from "./components/InputData/TraditionalTruckData";
+import HomePage from './containers/HomePage/HomePage';
 import Layout from "./hoc/Layout/Layout";
 import { rebuildNodesFromLocalStorage } from "./store/actions/nodes";
 import { rebuildPathsFromLocalStorage } from "./store/actions/paths";
+import { rebuildTrucksFromLocalStorage } from "./store/actions/trucks";
 import { Route, Switch, Redirect } from "react-router-dom";
+import LoginPage from "./containers/LoginPage/LoginPage";
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
@@ -58,16 +62,22 @@ function App() {
     // dispatch(mergeNodesForPaths())
     dispatch(rebuildPathsFromLocalStorage());
     dispatch(rebuildNodesFromLocalStorage());
+    dispatch(rebuildTrucksFromLocalStorage());
   }, [dispatch]);
 
   return (
     <ThemeProvider theme={theme}>
-      <Layout>
+
         <Switch>
-          <Route path="/" exact component={InputData} />
-          <Route path="/dispatchbuilder" exact component={DispatchBuilder} />
+
+          <Route path="/" exact component={LoginPage} />
+          <Layout>
+              <Route path="/dispatchbuilder" exact component={InputData} />
+              <Route path="/truckbuilder" exact component={TraditionalTruckData} />
+              <Route path="/results" exact component={DispatchBuilder} />
+          </Layout>
         </Switch>
-      </Layout>
+
     </ThemeProvider>
   );
 }

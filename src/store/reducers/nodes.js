@@ -26,6 +26,14 @@ const submitInputsSuccess = (state,action) => {
       return updateObject(state, {loading: true})
   }
 
+  const removeNode = (state, action) => {
+    return updateObject(state,{
+      loading: false,
+      nodes: state.nodes.filter(item => item.Nodes !== action.payload.Nodes),
+      types: {...state.types, [action.payload.NodeType] : state.types[action.payload.NodeType]-1}
+    })
+  }
+
 
 const reducer = (state = initialState, action) => {
   switch(action.type) {
@@ -35,6 +43,7 @@ const reducer = (state = initialState, action) => {
       return {...state, nodes: action.payload.nodes.map(item => item.nodeData), types: action.payload.types};
     case actionTypes.SUBMIT_INPUTS_FAIL: return submitInputsFail(state,action);
     case actionTypes.SUBMIT_INPUTS_START:return submitInputsStart(state,action);
+    case actionTypes.REMOVE_NODE: return removeNode(state,action);
     default:
       return state;
   }

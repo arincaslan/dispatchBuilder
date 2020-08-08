@@ -24,6 +24,16 @@ export const submitPathInputsStart = () => {
   }
 }
 
+export const removePath = (selectedPath) => {
+  console.log(selectedPath)
+  const pathsFromLocalStorage = JSON.parse(localStorage.getItem("paths")).filter(item => item.concatenatePath !== selectedPath.concatenatePath);
+  localStorage.setItem("paths", JSON.stringify(pathsFromLocalStorage));
+  return {
+    type: actionTypes.REMOVE_PATH,
+    payload: selectedPath
+  }
+}
+
 export const submitPathInputs = (path, token) => {
   return dispatch => {
     dispatch(submitPathInputsStart());

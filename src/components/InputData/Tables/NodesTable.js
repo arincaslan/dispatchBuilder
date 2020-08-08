@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // MATERIAL UI
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -10,6 +10,12 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Pagination from "@material-ui/lab/Pagination";
+import { IconButton } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+// actions
+import * as actions from '../../../store/actions/index';
+
+
 
 const useStyles = makeStyles({
   table: {
@@ -22,10 +28,13 @@ const NodesTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const nodes = useSelector((state) => state.nodesReducer.nodes);
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (nodes.length) {
       setRows(nodes.slice((currentPage - 1) * 5, currentPage * 5));
+    } else {
+      setRows([]);
     }
   }, [currentPage, nodes]);
 
@@ -37,6 +46,7 @@ const NodesTable = () => {
             <TableCell align="left">Node Name</TableCell>
             <TableCell align="left">Node Time&nbsp;(min)</TableCell>
             <TableCell align="left">Node Type</TableCell>
+            <TableCell align="left">Delete Node</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -45,6 +55,9 @@ const NodesTable = () => {
               <TableCell align="left">{row.Nodes}</TableCell>
               <TableCell align="left">{row.NodeTime}</TableCell>
               <TableCell align="left">{row.NodeType}</TableCell>
+              <IconButton onClick={(id) => dispatch(actions.removeNode( {Nodes: row.Nodes, NodeTime: row.NodeTime, NodeType: row.NodeType}))} aria-label="delete"  color="secondary">
+                <DeleteIcon />
+              </IconButton>
             </TableRow>
           ))}
         </TableBody>

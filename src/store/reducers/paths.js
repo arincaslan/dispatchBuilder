@@ -33,6 +33,13 @@ const submitPathInputsSuccess = (state,action) => {
       return updateObject(state, {loading: true})
   }
 
+  const removePath = (state, action) => {
+    return updateObject(state,{
+      loading: false,
+      paths: state.paths.filter(item => (item.concatenatePath !== action.payload.concatenatePath)),
+    })
+  }
+
 
 const reducer = (state = initialState, action) => {
   switch(action.type) {
@@ -40,10 +47,12 @@ const reducer = (state = initialState, action) => {
       return {...state, paths: [...state.paths, {...action.payload}]};
     case actionTypes.REBUILD_PATHS_FROM_LOCAL_STORAGE:
       return {...state, paths: action.payload.map(item => item)};
-    // case actionTypes.MERGE_NODES_FOR_PATHS:
-    //   return {...state, updatedPath:action.payload.map(item => item.pathData)}
+    case actionTypes.REMOVE_NODE:
+      return {...state, paths: state.paths.filter(item => !(item.FirstNode === action.payload.Nodes || item.SecondNode === action.payload.Nodes) && item )}
     case actionTypes.SUBMIT_PATH_INPUTS_FAIL: return submitPathInputsFail(state,action);
     case actionTypes.SUBMIT_PATH_INPUTS_START:return submitPathInputsStart(state,action);
+    case actionTypes.REMOVE_PATH:
+    return {...state, paths: state.paths.filter(item => !(item.concatenatePath === action.payload.concatenatePath) )}
     default:
       return state;
   }

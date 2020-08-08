@@ -4,6 +4,7 @@ import solver from "javascript-lp-solver";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import DispatchTable from "../../components/InputData/Tables/DispatchTable";
+import TraditionalTruckResultTable from "../../components/InputData/Tables/TraditionalTruckResultTable";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import CancelIcon from "@material-ui/icons/Cancel";
 
@@ -11,9 +12,34 @@ const DispatchBuilder = () => {
   const nodes = useSelector((state) => state.nodesReducer.nodes);
   const types = useSelector((state) => state.nodesReducer.types);
   const paths = useSelector((state) => state.pathsReducer.paths);
+  const trucks = useSelector((state) => state.trucksReducer.trucks);
+  const [truckResults, setTruckResults] = useState();
   const [dispatchResult, setDispatchResult] = useState();
 
   useEffect(() => {
+    if (trucks.length) {
+      for (let i = 0; i < trucks.length; i++){
+        const excavatorWorkRate = (trucks[i]['YearlyStrippingRate'] * trucks[i]['BucketStuffingFactor'] * 3600 * trucks[i]['WorkplaceEfficiency']) / (trucks[i]['RockSwellFactor'] * trucks[i]['BucketPeriod']);
+        const excavatorBucketTonnage = (trucks[i]['BucketVolume'] * trucks[i]['MaterialDensity']) / (trucks[i]['SoilBlisteringFactor']);
+        const truckFillTime = (trucks[i]['BucketPeriod'] * trucks[i]['TruckTonnage']) / (trucks[i]['BucketStuffingFactor'] * excavatorBucketTonnage);
+        const truckWorkRate = (3600 * trucks[i]['TruckTonnage'] * trucks[i]['WorkplaceEfficiency']) / (trucks[i]['UnloadingTime'] + trucks[i]['MeanTravelTime'] + trucks[i]['DriverFactor'] + truckFillTime);
+        const numberOfTrucks = excavatorWorkRate / truckWorkRate ;
+        console.log(excavatorWorkRate, excavatorBucketTonnage, truckFillTime, truckWorkRate, numberOfTrucks)
+
+        const traditionalTruckResults = {
+          ExcavatorWorkRate : excavatorWorkRate,
+          ExcavatorBucketTonnage : excavatorBucketTonnage,
+          TruckFillTime : truckFillTime,
+          TruckWorkRate : truckWorkRate,
+          NumberOfTrucks : numberOfTrucks
+      }
+        console.log(traditionalTruckResults)
+        setTruckResults(traditionalTruckResults);
+      }
+    }
+
+
+
     if (nodes.length && paths.length) {
       const constraintsVal = {};
       let rateLimitCounter = 1;
@@ -86,7 +112,7 @@ const DispatchBuilder = () => {
       console.log(results);
       setDispatchResult(results);
     }
-  }, [nodes, paths, types]);
+  }, [nodes, paths, types, trucks]);
 
   return (
     <div className="p-3">
@@ -163,11 +189,112 @@ const DispatchBuilder = () => {
                 {/* CONTENT WILL COME HERE (TABLE) */}
                 <DispatchTable result={dispatchResult} />
               </div>
+
             </div>
           </Paper>
         </div>
+      <div className="p-3">
+        <div className="row">
+          <div className = "col-12">
+              <Paper style={{ padding: "30px", width: "100%" }} elevation={2}>
+
+              </Paper>
+            </div>
+          </div>
+        </div>
+      </div>
+      //İkinci Tablo
+      <div className="row">
+        <div className="col-12">
+          <Paper style={{ padding: "25px" }} elevation={4}>
+            <Typography variant="h4" gutterBottom>
+              Traditional Truck Calculator Results
+            </Typography>
+            <Typography
+              style={{ color: "#767676" }}
+              variant="subtitle1"
+              className="mb-4"
+            >
+              Here you can view the solution of the equations and number of  paths.
+            </Typography>
+
+            <div className="row">
+              <div className="col-md-6 col-sm-12 d-flex justify-content-center align-items-center">
+                <Paper style={{ padding: "30px", width: "100%" }} elevation={2}>
+                  <Typography className="mb-3" variant="h5">
+                    General Information
+                  </Typography>
+                  <Typography
+                    style={{ color: "#767676", fontSize: "15px" }}
+                    variant="subtitle1"
+                    className="mb-4"
+                  >
+                    Global optimal solution has been found.
+                  </Typography>
+                  <div
+                    style={{ width: "300px" }}
+                    className="d-flex justify-content-between align-items-center"
+                  >
+                    <p style={{ width: "100px" }}>Trucks</p>
+                    <p
+                      className="pr-1"
+                      style={{ fontWeight: 300, color: "#767676" }}
+                    >
+                      {dispatchResult && dispatchResult.result}
+                    </p>
+                  </div>
+                  <div
+                    style={{ width: "300px" }}
+                    className="d-flex justify-content-between align-items-center mb-3"
+                  >
+                    <p className="mb-0" style={{ width: "100px" }}>
+                      Feasible
+                    </p>
+
+                    {dispatchResult && dispatchResult.feasible ? (
+                      <CheckCircleIcon color="primary" />
+                    ) : (
+                      <CancelIcon color="error" />
+                    )}
+                  </div>
+                  <div
+                    style={{ width: "300px" }}
+                    className="d-flex justify-content-between align-items-center mb-3"
+                  >
+                    <p className="mb-0" style={{ width: "100px" }}>
+                      Bounded
+                    </p>
+
+                    {dispatchResult && dispatchResult.bounded ? (
+                      <CheckCircleIcon color="primary" />
+                    ) : (
+                      <CancelIcon color="error" />
+                    )}
+                  </div>
+                </Paper>
+              </div>
+              <div className="col-md-6 col-sm-12">
+                {/* CONTENT WILL COME HERE (TABLE) */}
+
+                <TraditionalTruckResultTable traditionalTruckResults={truckResults}/>
+              </div>
+            </div>
+          </Paper>
+        </div>
+      <div className="p-3">
+        <div className="row">
+          <div className = "col-12">
+              <Paper style={{ padding: "30px", width: "100%" }} elevation={2}>
+
+              </Paper>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+
+
   );
 };
 //

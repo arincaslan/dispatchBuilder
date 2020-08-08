@@ -1,0 +1,101 @@
+.LoginContainer {
+  display: flex;
+}
+
+.RightContainer {
+  background-color: white;
+  flex: 0 1 50%;
+  flex-shrink: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (max-width: 1024px) {
+    & {
+      flex: 0 1 100%;
+    }
+  }
+}
+
+.CheckboxContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.FormContainer {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.LoginHeader {
+  color: #484848;
+}
+
+.LoginDescription {
+  color: #767676;
+  font-size: 0.8rem;
+}
+
+.Input {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 10px 15px 2px rgba(0,0,0,0.14);
+    padding: 10px 15px;
+    margin-bottom: 35px;
+    outline: none;
+}
+
+.LoginButton {
+  background: linear-gradient(90deg, rgba(77,153,245,1) 0%, rgba(101,184,249,1) 100%);;
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  color: white;
+}
+
+.LeftContainer {
+  flex: 0 1 50%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-width: 1024px) {
+    & {
+      display: none;
+    }
+  }
+}
+
+.LeftContainerTop {
+  flex-grow: 4;
+  background: url(../../assets/images/login-logo.jpeg);
+  background-size: 80%;
+  background-repeat: no-repeat;
+}
+
+.LeftContainerBottom {
+  flex-grow: 1;
+  background-color: white;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.LeftContainerBottomHeader {
+  color: #484848;
+}
+
+.LeftContainerBottomDescription {
+  color: #767676;
+  font-size: 0.8rem;
+}

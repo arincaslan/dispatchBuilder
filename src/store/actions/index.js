@@ -1,2 +1,3 @@
-export {submitInputs} from './nodes';
-export {submitPathInputs} from './paths';
+export {submitInputs, removeNode} from './nodes';
+export {submitPathInputs, removePath} from './paths';
+export {submitTruckInputs, removeTruck} from './trucks';
