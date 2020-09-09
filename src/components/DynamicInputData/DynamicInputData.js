@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import NodsForm from "./Forms/NodesForm";
-import PathsData from "./Forms/PathsForm";
+import DynamicNodesForm from "./Forms/DynamicNodesForm";
+import DynamicPathsForm from "./Forms/DynamicPathsForm";
 import NodeCard from "../NodeCard/NodeCard";
-import NodesTable from "./Tables/NodesTable";
-import PathsTable from "./Tables/PathsTable";
+import DynamicNodesTable from "./Tables/DynamicNodesTable";
+import DynamicPathsTable from "./Tables/DynamicPathsTable";
 
 // REDUX
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 // MATERIAL UI
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
@@ -14,8 +15,10 @@ import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
 import InfoIcon from "@material-ui/icons/Info";
 
-const InputData = (props) => {
-  const nodes = useSelector((state) => state.nodesReducer.nodes);
+const DynamicInputData = (props) => {
+  const dynamicTrucks = useSelector(
+    (state) => state.dynamicTrucksReducer.dynamicTrucks
+  );
 
   return (
     <div className="p-4">
@@ -24,7 +27,7 @@ const InputData = (props) => {
           <Paper style={{ padding: "25px" }} elevation={4}>
             <div className="d-flex align-items-center mt-3">
               <Typography variant="h4" gutterBottom>
-                Nodes
+                Step 1 : Nodes Form
               </Typography>
               <Tooltip
                 title="Bu formu doldurarak maden işletmesindeki elemanları tanımlatabilir ve optimizasyon için burdaki işlem sürelerini belirtebilirsiniz. Nokta türlerini genel olarak üç sınıfa böldük. Showel türü bu maksatla ekskavatörlere karşı gelmektedir. Dump türü döküm alanlarını temsil eder. Crusher türü ise işleme tesislerini temsil etmektedir. Bu faktörleri değerlendirerek formunuzu doğru şekilde doldurunuz. "
@@ -66,12 +69,12 @@ const InputData = (props) => {
                   <Typography className="mb-3" variant="h5">
                     Create New Node
                   </Typography>
-                  <NodsForm />
+                  <DynamicNodesForm />
                 </Paper>
               </div>
               <div className="col-md-6 col-sm-12">
                 {/* CONTENT WILL COME HERE (TABLE) */}
-                <NodesTable />
+                <DynamicNodesTable />
               </div>
             </div>
           </Paper>
@@ -82,7 +85,7 @@ const InputData = (props) => {
           <Paper style={{ padding: "25px" }} elevation={4}>
             <div className="d-flex align-items-center mt-3">
               <Typography variant="h4" gutterBottom>
-                Paths
+                Step 2 : Paths Form
               </Typography>
               <Tooltip
                 title="Bu formda, Nodes formunda belirttiğiniz maden elemanları arasında yollar oluşturacağız. Seçtiğiniz 1. elemandan 2. elemana yolda geçen zamanları belirtiniz. Optimizasyonun sağlıklı gerçekleşmesi için lütfen mantık dışı yolları dahil etmeyiniz. Örneğin bir kamyonun bir ekskavatörden başka bir ekskavatöre gitmesi mantıksız olur. Bu uyaranı dikkate alarak formunuzu optimizasyon için doldurunuz. "
@@ -124,19 +127,30 @@ const InputData = (props) => {
                   <Typography className="mb-3" variant="h5">
                     Create New Path
                   </Typography>
-                  <PathsData />
+                  <DynamicPathsForm />
                 </Paper>
               </div>
               <div className="col-md-6 col-sm-12">
                 {/* CONTENT WILL COME HERE (TABLE) */}
-                <PathsTable />
+                <DynamicPathsTable />
               </div>
             </div>
           </Paper>
         </div>
       </div>
+      <div className="d-flex justify-content-end">
+        <Button
+          component={Link}
+          to="/dynamicdispatchbuildertruckspage"
+          className="mt-5"
+          variant="contained"
+          color="primary"
+        >
+          Go Next
+        </Button>
+      </div>
     </div>
   );
 };
 
-export default InputData;
+export default DynamicInputData;

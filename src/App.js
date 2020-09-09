@@ -2,14 +2,34 @@ import React, { useEffect, Suspense } from "react";
 import "./App.css";
 import * as firebase from "firebase/app";
 import { useDispatch } from "react-redux";
+
+//Routes
 import DispatchBuilder from "./containers/DispatchBuilder/DispatchBuilder";
+import DynamicDispatchBuilder from "./containers/DynamicDispatchBuilder/DynamicDispatchBuilder";
 import InputData from "./components/InputData/InputData";
+import DynamicInputData from "./components/DynamicInputData/DynamicInputData";
+import DynamicInputDataTrucksPage from "./components/DynamicInputDataTrucksPage/DynamicInputDataTrucksPage";
+import DynamicInputDataElementsPage from "./components/DynamicInputDataElementsPage/DynamicInputDataElementsPage";
+import DynamicInputDataDischargePage from "./components/DynamicInputDataDischargePage/DynamicInputDataDischargePage";
+import DynamicInputDataFinalPage from "./components/DynamicInputDataFinalPage/DynamicInputDataFinalPage";
 import TraditionalTruckData from "./components/InputData/TraditionalTruckData";
 import HomePage from "./containers/HomePage/HomePage";
 import Layout from "./hoc/Layout/Layout";
+
+//Rebuild From Storage
 import { rebuildNodesFromLocalStorage } from "./store/actions/nodes";
 import { rebuildPathsFromLocalStorage } from "./store/actions/paths";
 import { rebuildTrucksFromLocalStorage } from "./store/actions/trucks";
+import { rebuildDynamicTrucksFromLocalStorage } from "./store/actions/dynamicTrucks";
+import { rebuildDynamicNodesFromLocalStorage } from "./store/actions/dynamicNodes";
+import { rebuildDynamicPathsFromLocalStorage } from "./store/actions/dynamicPaths";
+import { rebuildDynamicPathCostsFromLocalStorage } from "./store/actions/dynamicPathCosts";
+import { rebuildDynamicShowelsFromLocalStorage } from "./store/actions/dynamicShowels";
+import { rebuildDynamicCrushersFromLocalStorage } from "./store/actions/dynamicCrushers";
+import { rebuildDynamicOreDepotsFromLocalStorage } from "./store/actions/dynamicOreDepots";
+import { rebuildDynamicDischargesFromLocalStorage } from "./store/actions/dynamicDischarges";
+import { rebuildDynamicFinalsFromLocalStorage } from "./store/actions/dynamicFinal";
+//
 import { Route, Switch, Redirect } from "react-router-dom";
 import LoginPage from "./containers/LoginPage/LoginPage";
 // import "./assets/vendor/amchart-core";
@@ -62,10 +82,18 @@ function App() {
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
-    // dispatch(mergeNodesForPaths())
     dispatch(rebuildPathsFromLocalStorage());
     dispatch(rebuildNodesFromLocalStorage());
+    dispatch(rebuildDynamicTrucksFromLocalStorage());
+    dispatch(rebuildDynamicNodesFromLocalStorage());
+    dispatch(rebuildDynamicPathsFromLocalStorage());
+    dispatch(rebuildDynamicPathCostsFromLocalStorage());
+    dispatch(rebuildDynamicShowelsFromLocalStorage());
+    dispatch(rebuildDynamicCrushersFromLocalStorage());
+    dispatch(rebuildDynamicOreDepotsFromLocalStorage());
+    dispatch(rebuildDynamicDischargesFromLocalStorage());
     dispatch(rebuildTrucksFromLocalStorage());
+    dispatch(rebuildDynamicFinalsFromLocalStorage());
   }, [dispatch]);
 
   return (
@@ -74,8 +102,38 @@ function App() {
         <Route path="/" exact component={LoginPage} />
         <Layout>
           <Route path="/dispatchbuilder" exact component={InputData} />
+          <Route
+            path="/dynamicdispatchbuilderelementspage"
+            exact
+            component={DynamicInputDataElementsPage}
+          />
+          <Route
+            path="/dynamicdispatchbuildertruckspage"
+            exact
+            component={DynamicInputDataTrucksPage}
+          />
+          <Route
+            path="/dynamicdispatchbuilder"
+            exact
+            component={DynamicInputData}
+          />
+          <Route
+            path="/dynamicdispatchbuilderdischargepage"
+            exact
+            component={DynamicInputDataDischargePage}
+          />
+          <Route
+            path="/dynamicdispatchbuilderfinalpage"
+            exact
+            component={DynamicInputDataFinalPage}
+          />
           <Route path="/truckbuilder" exact component={TraditionalTruckData} />
           <Route path="/results" exact component={DispatchBuilder} />
+          <Route
+            path="/dynamicresults"
+            exact
+            component={DynamicDispatchBuilder}
+          />
         </Layout>
       </Switch>
     </ThemeProvider>

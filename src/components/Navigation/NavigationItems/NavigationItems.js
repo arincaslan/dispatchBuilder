@@ -9,12 +9,16 @@ const navigationItems = () => (
       Home
     </NavigationItem>
     <NavigationItem link="/dispatchbuilder" exact>
-      Dispatch Builder
+      Static Dispatch Builder
+    </NavigationItem>
+    <NavigationItem link="/dynamicdispatchbuilder" exact>
+      Real Time Dispatch Builder
     </NavigationItem>
     <NavigationItem link="/truckbuilder" exact>
       Truck Builder
     </NavigationItem>
     <NavigationItem link="/results">Results</NavigationItem>
+    <NavigationItem link="/dynamicresults">Dynamic Results</NavigationItem>
   </ul>
 );
 

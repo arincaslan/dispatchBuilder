@@ -13,9 +13,10 @@ import Spinner from "../../UI/Spinner/Spinner";
 import Input from "../../UI/Input/Input";
 import { updateObject, checkValidity } from "../../../shared/utility";
 import * as actions from "../../../store/actions/index";
-import { connect, useSelector } from "react-redux";
+import { connect, useSelector, useDispatch } from "react-redux";
 
 const TraditionalTruckForm = (props) => {
+  const dispatch = useDispatch();
   const [traditionalTruckForm, setTraditionalTruckForm] = useState({
     YearlyStrippingRate: {
       elementType: "input",
@@ -217,7 +218,10 @@ const TraditionalTruckForm = (props) => {
               }
               style={{ flexGrow: 1 }}
             ></TextField>
-            <Tooltip title="deneme deneme" placement="top">
+            <Tooltip
+              title="Yearly Stripping Rate / Yıllık Dekapaj Oranı"
+              placement="top"
+            >
               <InfoIcon
                 style={{
                   cursor: "pointer",
@@ -239,7 +243,10 @@ const TraditionalTruckForm = (props) => {
               }
               style={{ flexGrow: 1 }}
             ></TextField>
-            <Tooltip title="deneme deneme" placement="top">
+            <Tooltip
+              title="Bucket Stuffing Factor / Kepçe Dolma Faktörü (0.8, 0.9, 1)"
+              placement="top"
+            >
               <InfoIcon
                 style={{
                   cursor: "pointer",
@@ -261,7 +268,10 @@ const TraditionalTruckForm = (props) => {
               }
               style={{ flexGrow: 1 }}
             ></TextField>
-            <Tooltip title="deneme deneme" placement="top">
+            <Tooltip
+              title="Workplace Efficiency / İş Yeri Randımanı (Saatte Fiili Çalışma Süresi)"
+              placement="top"
+            >
               <InfoIcon
                 style={{
                   cursor: "pointer",
@@ -283,7 +293,10 @@ const TraditionalTruckForm = (props) => {
               }
               style={{ flexGrow: 1 }}
             ></TextField>
-            <Tooltip title="deneme deneme" placement="top">
+            <Tooltip
+              title="Rock Swell Factor / Kayaç Kabarma Faktörü"
+              placement="top"
+            >
               <InfoIcon
                 style={{
                   cursor: "pointer",
@@ -303,7 +316,7 @@ const TraditionalTruckForm = (props) => {
               onChange={(event) => inputChangedHandler(event, "BucketPeriod")}
               style={{ flexGrow: 1 }}
             ></TextField>
-            <Tooltip title="deneme deneme" placement="top">
+            <Tooltip title="Bucket Period / Kepçe Periyodu" placement="top">
               <InfoIcon
                 style={{
                   cursor: "pointer",
@@ -323,7 +336,7 @@ const TraditionalTruckForm = (props) => {
               onChange={(event) => inputChangedHandler(event, "BucketVolume")}
               style={{ flexGrow: 1 }}
             ></TextField>
-            <Tooltip title="deneme deneme" placement="top">
+            <Tooltip title="Bucket Volume / Kepçe Hacmi" placement="top">
               <InfoIcon
                 style={{
                   cursor: "pointer",
@@ -343,7 +356,7 @@ const TraditionalTruckForm = (props) => {
               onChange={(event) => inputChangedHandler(event, "TruckTonnage")}
               style={{ flexGrow: 1 }}
             ></TextField>
-            <Tooltip title="deneme deneme" placement="top">
+            <Tooltip title="Truck Tonnage / Kamyon Tonajı" placement="top">
               <InfoIcon
                 style={{
                   cursor: "pointer",
@@ -365,7 +378,10 @@ const TraditionalTruckForm = (props) => {
               }
               style={{ flexGrow: 1 }}
             ></TextField>
-            <Tooltip title="deneme deneme" placement="top">
+            <Tooltip
+              title="Material Density / Malzeme Yoğunluğu"
+              placement="top"
+            >
               <InfoIcon
                 style={{
                   cursor: "pointer",
@@ -387,7 +403,10 @@ const TraditionalTruckForm = (props) => {
               }
               style={{ flexGrow: 1 }}
             ></TextField>
-            <Tooltip title="deneme deneme" placement="top">
+            <Tooltip
+              title="Soil Blistering Factor / Toprak Kabarma Faktörü"
+              placement="top"
+            >
               <InfoIcon
                 style={{
                   cursor: "pointer",
@@ -407,7 +426,7 @@ const TraditionalTruckForm = (props) => {
               onChange={(event) => inputChangedHandler(event, "UnloadingTime")}
               style={{ flexGrow: 1 }}
             ></TextField>
-            <Tooltip title="deneme deneme" placement="top">
+            <Tooltip title="Unloading Time / Boşaltma Zamanı" placement="top">
               <InfoIcon
                 style={{
                   cursor: "pointer",
@@ -427,7 +446,10 @@ const TraditionalTruckForm = (props) => {
               onChange={(event) => inputChangedHandler(event, "MeanTravelTime")}
               style={{ flexGrow: 1 }}
             ></TextField>
-            <Tooltip title="deneme deneme" placement="top">
+            <Tooltip
+              title="Mean Travel Time / Ortalama Yolculuk Süresi"
+              placement="top"
+            >
               <InfoIcon
                 style={{
                   cursor: "pointer",
@@ -447,7 +469,7 @@ const TraditionalTruckForm = (props) => {
               onChange={(event) => inputChangedHandler(event, "DriverFactor")}
               style={{ flexGrow: 1 }}
             ></TextField>
-            <Tooltip title="deneme deneme" placement="top">
+            <Tooltip title="Driver Factor / Sürücü Faktörü" placement="top">
               <InfoIcon
                 style={{
                   cursor: "pointer",
@@ -470,6 +492,17 @@ const TraditionalTruckForm = (props) => {
           color="primary"
         >
           Add Data
+        </Button>
+        <Button
+          onClick={(id) =>
+            dispatch(actions.removeTruck(setTraditionalTruckForm([""])))
+          }
+          type="submit"
+          className="mt-5 ml-2"
+          variant="contained"
+          color="danger"
+        >
+          Delete Data
         </Button>
       </div>
     </form>
