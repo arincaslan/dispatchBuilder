@@ -14,12 +14,16 @@ const navigationItems = () => (
     <NavigationItem link="/dynamicdispatchbuilder" exact>
       Real Time Dispatch Builder
     </NavigationItem>
-    <NavigationItem link="/truckbuilder" exact>
-      Truck Builder
+    <NavigationItem link="/dynamicdispatchbuildergp" exact>
+      Real Time Dispatch Builder (GP)
     </NavigationItem>
+
     <NavigationItem link="/results">Results</NavigationItem>
     <NavigationItem link="/dynamicresults">Dynamic Results</NavigationItem>
   </ul>
 );
 
 export default navigationItems;
+// <NavigationItem link="/truckbuilder" exact>
+//   Truck Builder
+// </NavigationItem>

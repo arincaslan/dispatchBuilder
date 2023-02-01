@@ -35,16 +35,16 @@ export const removeDynamicNode = (selectedNode) => {
     "dynamicNodes",
     JSON.stringify(dynamicNodesFromLocalStorage)
   );
-  // const pathsFromLocalStorage = JSON.parse(
-  //   localStorage.getItem("paths")
-  // ).filter(
-  //   (item) =>
-  //     !(
-  //       item.FirstNode === selectedNode.DynamicNodes ||
-  //       item.SecondNode === selectedNode.DynamicNodes
-  //     ) && item
-  // );
-  // localStorage.setItem("paths", JSON.stringify(pathsFromLocalStorage));
+  const pathsFromLocalStorage = JSON.parse(
+    localStorage.getItem("paths")
+  ).filter(
+    (item) =>
+      !(
+        item.FirstNode === selectedNode.DynamicNodes ||
+        item.SecondNode === selectedNode.DynamicNodes
+      ) && item
+  );
+  localStorage.setItem("paths", JSON.stringify(pathsFromLocalStorage));
   return {
     type: actionTypes.REMOVE_DYNAMIC_NODE,
     payload: selectedNode,

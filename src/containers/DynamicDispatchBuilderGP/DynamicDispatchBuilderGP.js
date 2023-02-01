@@ -8,7 +8,7 @@ import TraditionalTruckResultTable from "../../components/InputData/Tables/Tradi
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import CancelIcon from "@material-ui/icons/Cancel";
 
-const DynamicDispatchBuilder = () => {
+const DynamicDispatchBuilderGP = () => {
   const nodes = useSelector((state) => state.nodesReducer.nodes);
   const types = useSelector((state) => state.nodesReducer.types);
   const paths = useSelector((state) => state.pathsReducer.paths);
@@ -19,51 +19,10 @@ const DynamicDispatchBuilder = () => {
   const dynamicTypes = useSelector(
     (state) => state.dynamicNodesReducer.dynamicTypes
   );
-  const dynamicPaths = useSelector(
-    (state) => state.dynamicPathsReducer.dynamicPaths
-  );
-  const dynamicPathCosts = useSelector(
-    (state) => state.dynamicPathCostsReducer.dynamicPathCosts
-  );
-  const dynamicTrucks = useSelector(
-    (state) => state.dynamicTrucksReducer.dynamicTrucks
-  );
-  const dynamicShowels = useSelector(
-    (state) => state.dynamicShowelsReducer.dynamicShowels
-  );
-  const dynamicCrushers = useSelector(
-    (state) => state.dynamicCrushersReducer.dynamicCrushers
-  );
-  const dynamicOreDepots = useSelector(
-    (state) => state.dynamicOreDepotsReducer.dynamicOreDepots
-  );
-  const dynamicDischarges = useSelector(
-    (state) => state.dynamicDischargesReducer.dynamicDischarges
-  );
-  const dynamicFinals = useSelector(
-    (state) => state.dynamicFinalsReducer.dynamicFinals
-  );
 
   const [dispatchResult, setDispatchResult] = useState();
 
   useEffect(() => {
-    // if (
-    //   dynamicPathCosts.length &&
-    //   dynamicTrucks.length &&
-    //   dynamicShowels.length &&
-    //   dynamicCrushers.length &&
-    //   dynamicOreDepots.length
-    // ) {
-    //   let objective1;
-    //   for (let i = 0; i < dynamicPathCosts.length; i++) {
-    //     objective1 =
-    //       dynamicPathCosts[i]["DynamicConcatenatedPaths"] *
-    //         dynamicPathCosts[i]["DynamicTravelCostForPath"] +
-    //       dynamicShowels.map((item) => item["DynamicShowelTonneCost"]);
-    //   }
-    //   const objective2 = dynamicPathCosts['DynamicPathType'] === "Unloaded" ? dynamicPathCosts.map((item) => item["DynamicConcatenatedPaths"])
-    // }
-
     if (nodes.length && paths.length) {
       const constraintsVal = {};
       let rateLimitCounter = 1;
@@ -229,4 +188,4 @@ const DynamicDispatchBuilder = () => {
   );
 };
 //
-export default DynamicDispatchBuilder;
+export default DynamicDispatchBuilderGP;

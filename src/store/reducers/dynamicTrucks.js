@@ -43,8 +43,10 @@ const reducer = (state = initialState, action) => {
     case actionTypes.REBUILD_DYNAMIC_TRUCKS_FROM_LOCAL_STORAGE:
       return {
         ...state,
-        dynamicTrucks: action.payload.map((item) => item.dynamicTruckData),
+        // dynamicTrucks: action.payload.dynamicTrucks.map((item) => item.dynamicTruckData) 
       };
+  
+
     case actionTypes.SUBMIT_DYNAMIC_TRUCK_INPUTS_FAIL:
       return submitDynamicTruckInputsFail(state, action);
     case actionTypes.SUBMIT_DYNAMIC_TRUCK_INPUTS_START:
@@ -55,5 +57,6 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
+  
 
 export default reducer;

@@ -66,13 +66,11 @@ export const submitDynamicTruckInputs = (dynamicTruckData, token) => {
 
 export const rebuildDynamicTrucksFromLocalStorage = () => {
   const dynamicTrucks = JSON.parse(localStorage.getItem("dynamicTrucks"));
-  const newDynamicTrucks = dynamicTrucks
-    ? dynamicTrucks.map((dynamicTruck) => dynamicTruck.dynamicTruckData)
-    : [];
+
   return dynamicTrucks
     ? {
         type: actionTypes.REBUILD_DYNAMIC_TRUCKS_FROM_LOCAL_STORAGE,
-        payload: dynamicTrucks,
+        payload: dynamicTrucks.dynamicTruckData,
       }
     : {
         type: actionTypes.REBUILD_DYNAMIC_TRUCKS_FROM_LOCAL_STORAGE,

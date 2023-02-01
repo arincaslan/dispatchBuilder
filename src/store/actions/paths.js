@@ -50,15 +50,6 @@ export const submitPathInputs = (path, token) => {
 };
 
 
-// export const mergeNodesForPaths = () => {
-//   const updatedPath = {};
-//   const paths = JSON.parse(localStorage.getItem('paths'));
-//   if (paths !== null ) {
-//     updatedPath.push( JSON.stringify(paths.FirstNode) + JSON.stringify(paths.SecondNode));
-//   }
-//   return updatedPath ? {type: actionTypes.MERGE_NODES_FOR_PATHS, payload: updatedPath}: {type: actionTypes.MERGE_NODES_FOR_PATHS, payload: []};
-// }
-
 export const rebuildPathsFromLocalStorage = () => {
   const paths = JSON.parse(localStorage.getItem("paths"));
   return paths ? {type: actionTypes.REBUILD_PATHS_FROM_LOCAL_STORAGE, payload: paths} : {type: actionTypes.REBUILD_PATHS_FROM_LOCAL_STORAGE, payload: []};

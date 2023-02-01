@@ -25,3 +25,5 @@ export {
   removeDynamicDischarge,
 } from "./dynamicDischarges";
 export { submitDynamicFinalInputs, removeDynamicFinal } from "./dynamicFinal";
+
+export { submitGpNodeInputs, removeGpNode } from "./gpNodes";

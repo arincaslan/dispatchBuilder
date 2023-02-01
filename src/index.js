@@ -22,8 +22,10 @@ import dynamicCrushersReducer from "./store/reducers/dynamicCrushers";
 import dynamicOreDepotsReducer from "./store/reducers/dynamicOreDepots";
 import dynamicDischargesReducer from "./store/reducers/dynamicDischarges";
 import dynamicFinalsReducer from "./store/reducers/dynamicFinal";
+import gpNodesReducer from "./store/reducers/gpNodes";
 
 //React
+
 import { BrowserRouter } from "react-router-dom";
 import { connectRouter } from "connected-react-router";
 import { routerMiddleware } from "connected-react-router";
@@ -51,6 +53,7 @@ const rootReducer = combineReducers({
   dynamicOreDepotsReducer: dynamicOreDepotsReducer,
   dynamicFinalsReducer: dynamicFinalsReducer,
   dynamicDischargesReducer: dynamicDischargesReducer,
+  gpNodesReducer: gpNodesReducer,
 });
 
 const store = createStore(

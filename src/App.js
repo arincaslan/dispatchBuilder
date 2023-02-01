@@ -8,6 +8,7 @@ import DispatchBuilder from "./containers/DispatchBuilder/DispatchBuilder";
 import DynamicDispatchBuilder from "./containers/DynamicDispatchBuilder/DynamicDispatchBuilder";
 import InputData from "./components/InputData/InputData";
 import DynamicInputData from "./components/DynamicInputData/DynamicInputData";
+import DynamicInputDataGP from "./components/DynamicInputDataGP/DynamicInputDataGP";
 import DynamicInputDataTrucksPage from "./components/DynamicInputDataTrucksPage/DynamicInputDataTrucksPage";
 import DynamicInputDataElementsPage from "./components/DynamicInputDataElementsPage/DynamicInputDataElementsPage";
 import DynamicInputDataDischargePage from "./components/DynamicInputDataDischargePage/DynamicInputDataDischargePage";
@@ -116,6 +117,11 @@ function App() {
             path="/dynamicdispatchbuilder"
             exact
             component={DynamicInputData}
+          />
+          <Route
+            path="/dynamicdispatchbuildergp"
+            exact
+            component={DynamicInputDataGP}
           />
           <Route
             path="/dynamicdispatchbuilderdischargepage"
